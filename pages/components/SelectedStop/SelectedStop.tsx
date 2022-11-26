@@ -1,15 +1,15 @@
 import { useJourneyContext } from "../../journeyContext";
 
 const SelectedStop = () => {
-    const {futureJourneys} = useJourneyContext();
+    const {stopPlaceName} = useJourneyContext();
     
-    if (!futureJourneys) {
+    if (!stopPlaceName) {
         return <></>;
     }
 
     return (
         <div>
-            <h1>{futureJourneys.name}</h1>
+            <h1>{stopPlaceName}</h1>
         </div>
     )
 }
