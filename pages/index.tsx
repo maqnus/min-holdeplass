@@ -1,10 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
-import FutureJourneys from './components/FutureJourneys/FutureJourneys'
+import NextArrivals from './components/NextArrivals/NextArrivals'
 import Navigation from './components/Navigation/Navigation'
-import SelectedStop from './components/SelectedStop/SelectedStop'
-import JourneyWrapper from './journeyContext'
+import JourneyWrapper, { useJourneyContext } from './journeyContext'
+
+const Title = () => {
+  const {stopPlaceName} = useJourneyContext();
+  return (
+    <h1 className={styles.title}>I <span className={styles.materialIcon}>favorite</span> {stopPlaceName} </h1>
+  )
+};
 
 export default function Home() {
   return (
@@ -13,26 +19,24 @@ export default function Home() {
         <title>Mitt stopp</title>
         <meta name="description" content="Rutedata for din favoritt-holdeplass i sanntid" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"></link>
       </Head>
+      <JourneyWrapper>
+        <main className={styles.main}>
+          <Title />
+          <p className={styles.description}>
+            Rutedata for verdens beste holdeplass <span>i sanntid</span>
+          </p>
+          
+          {/* <Navigation /> */}
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Mitt stopp
-        </h1>
-        <p className={styles.description}>
-          Rutedata for din favoritt-holdeplass <span>i sanntid</span>
-        </p>
-        
-        <Navigation />
+          <div className={styles.grid}>
+              <NextArrivals />
+          </div>
+        </main>
+      </JourneyWrapper>
 
-        <div className={styles.grid}>
-          <JourneyWrapper>
-            <SelectedStop />
-            <FutureJourneys />
-          </JourneyWrapper>
-
-        </div>
-      </main>
 
       <footer className={styles.footer}>
         <a

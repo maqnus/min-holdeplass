@@ -24,3 +24,9 @@ a {
     background: black;
   }
 }
+
+.materialIcon {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+}

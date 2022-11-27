@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.materialIcon {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.card {
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+
+    &.dark {
+        background-color: #1A183F;
+    }
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.arrival {
+    font-family: 'VT323', monospace;
+    font-size: 2rem;
+    display: grid;
+    grid-template-columns: 3ch 4ch auto 15ch;
+    
+    &.dark {
+        color: rgb(248, 211, 6);
+        background-color: #111;
+        margin-bottom: .5rem;
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+
+    &.light {
+        color:#1A183F;
+    }
+    
+    .lineId {}
+    .frontText {}
+    .eta {
+      text-align: right;
+    }
+}
+
+.delay {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    position: relative;
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	padding: 10vh 0 25vh;
+	--marquee-width: 100vw;
+	--offset: 20vw;
+	--move-initial: calc(0% + var(--offset));
+	--move-final: calc(-50% + var(--offset));
+	--item-font-size: 2rem;
+	counter-reset: menu;
+
+    .marquee {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: var(--marquee-width);
+        overflow: hidden;
+        pointer-events: none;
+        mix-blend-mode: color-burn;
+    }
+    
+    .list {
+        width: fit-content;
+        display: flex;
+        position: relative;
+        transform: translate3d(var(--move-initial), 0, 0);
+        animation: marquee 10s linear infinite;
+        animation-play-state: paused;
+        opacity: 0;
+        transition: opacity 0.1s;
+        list-style: none;
+    }
+    
+    .marquee .list {
+        animation-play-state: running;
+        opacity: 1;
+        transition-duration: 0.4s;
+    }
+    
+    .marquee li {
+        font-family: 'VT323', monospace;
+        text-align: center;
+        white-space: nowrap;
+        font-size: var(--item-font-size);
+        padding: 0 1vw;
+        line-height: 1.15;
+        margin-right: 5rem;
+    }
+    
+    @keyframes marquee {
+        0% {
+            transform: translate3d(var(--move-initial), 0, 0);
+        }
+    
+        100% {
+            transform: translate3d(var(--move-final), 0, 0);
+        }
+    }
+}
