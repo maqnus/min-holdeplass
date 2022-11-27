@@ -28,8 +28,8 @@ interface EstimatedCall {
     aimedDepartureTime: string;
     date: string;
     destinationDisplay: DestinationDisplay;
-    expectedArrivalTime: string | null;
-    expectedDepartureTime: string | null;
+    expectedArrivalTime: string;
+    expectedDepartureTime: string;
     forAlighting: boolean;
     forBoarding: boolean;
     quay: Quay;
@@ -60,6 +60,8 @@ const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
             query: departureBoard,
             variables: { stopPlaceId: 'NSR:StopPlace:4000' }
         }).then(({data}) => {
+            console.log(data);
+            
             setEstimatedCalls(data.stopPlace.estimatedCalls);
             setStopPlaceName(data.stopPlace.name);
         })
@@ -70,7 +72,7 @@ const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
             setTimeout(() => {
                 setIsGettingData(false);
                 getDepartureData();
-            }, 10000);
+            }, 60 * 500);
         });
     }, [isGettingData]);
 
