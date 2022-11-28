@@ -15,8 +15,13 @@ interface ServiceJourney {
     journeyPattern: {
         line: {
             id: string;
+            publicCode: string;
             name: string;
             transportMode: string;
+            presentation: {
+                colour: string;
+                textColor: string;
+            }
         }
     };
 }

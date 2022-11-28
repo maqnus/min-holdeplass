@@ -6,6 +6,10 @@
     background-color: #111;
     position: relative;
 
+    &:hover {
+        background-color: #222;
+    }
+
     .summary {
         position: relative;
         display: grid;
@@ -13,10 +17,6 @@
         column-gap: 1rem;
         padding: .5rem 1rem;
         cursor: pointer;
-
-        &:hover {
-            background-color: #222;
-        }
 
         &::-webkit-details-marker {
             display: none;
@@ -26,7 +26,9 @@
             z-index: 1;
         }
     }
+    
     .contentWrapper {
+        border-top: solid 1px rgb(24, 24, 24);
         display: grid;
         grid-template-columns: 3ch 3ch auto;
         grid-template-areas: ". . content";
@@ -34,12 +36,17 @@
         padding: .5rem 1rem;
     }
 
-    .longTitle {}
-
-    .shortTitle {}
+    .publicCode {
+        display: flex;
+        justify-content: center;
+    }
 
     .time {
         text-align: right;
+    }
+
+    .isDelayed {
+        color: rgb(248, 211, 6);
     }
 
     .content {

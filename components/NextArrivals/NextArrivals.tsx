@@ -13,11 +13,13 @@ const NextArrivals = () => {
                             <li key={key}>
                                 <Departure
                                     forBoarding={journey.forBoarding}
-                                    id={journey?.serviceJourney?.journeyPattern?.line?.id}
+                                    publicCode={journey?.serviceJourney?.journeyPattern?.line?.publicCode}
                                     shortTitle={journey?.destinationDisplay?.frontText}
                                     longTitle={journey?.serviceJourney?.journeyPattern?.line?.name}
                                     aimedArrivalTime={journey.aimedArrivalTime}
                                     expectedArrivalTime={journey.expectedArrivalTime}
+                                    transportMode={journey?.serviceJourney?.journeyPattern?.line?.transportMode}
+                                    presentation={journey?.serviceJourney?.journeyPattern?.line?.presentation}
                                 />
                             </li>
                         ))

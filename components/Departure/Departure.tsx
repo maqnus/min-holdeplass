@@ -14,21 +14,30 @@ const onTime = ({aimedArrivalTime, expectedArrivalTime}: DelayInfoProps) => {
 };
 
 interface DepartureProps {
+    forAlighting: boolean,
     forBoarding: boolean,
-    id: string,
+    publicCode: string,
     shortTitle: string,
     longTitle: string,
     aimedArrivalTime: string,
     expectedArrivalTime: string,
+    transportMode: string,
+    presentation: {
+        colour: string,
+        textColor: string,
+    },
 }
 
 const Departure = ({
+    forAlighting,
     forBoarding,
-    id,
+    publicCode,
     shortTitle,
     longTitle,
     aimedArrivalTime,
     expectedArrivalTime,
+    transportMode,
+    presentation,
 }: DepartureProps) => {
     // Temporal is a new API for working with dates and times
     // https://tc39.es/proposal-temporal/docs/
@@ -36,32 +45,49 @@ const Departure = ({
     const now = Temporal.PlainDateTime.from(Temporal.Now.zonedDateTimeISO('Europe/Oslo').toString());
     const then = Temporal.PlainDateTime.from(expectedArrivalTime);
     const timeUntilExpectedDeparture = now.until(then, { smallestUnit: 'minute' }).minutes;
-    const isDelayed = !onTime({aimedArrivalTime, expectedArrivalTime});
+    const delayedMinutes = Temporal.PlainDateTime.from(aimedArrivalTime).until(then, { smallestUnit: 'minute' }).minutes;
     return (
-        <details className={`${styles.arrival} ${isDelayed ? styles.isDelayed : ''}`}>
+        <details className={`${styles.details} ${styles.arrival} ${delayedMinutes ? styles.isDelayed : ''}`}>
             <summary className={styles.summary}>
                 <span className={`materialIcon ${styles.icon}`}>
-                    {forBoarding ? 'directions_bus' : 'bus_alert'}
+                    {transportMode === 'bus' && (
+                        <>{forBoarding ? 'directions_bus' : 'bus_alert'}</>
+                    )}
                 </span>
-                <span className={styles.id}>
-                    {id?.split(':')[2]}
+                <span className={styles.publicCode} style={{'backgroundColor': `#${presentation?.colour}`, 'color': `#${presentation?.textColor}`}}>
+                    {publicCode}
                 </span>
-                <span className={`is-hidden-mobile ${styles.longTitle}`}>
-                    {longTitle}
-                </span>
-                <span className={`is-hidden-tablet ${styles.shortTitle}`}>
+                <span className={styles.shortTitle}>
                     {shortTitle}
                 </span>
-                <span className={styles.time}>
+                <span className={`${styles.time} ${delayedMinutes ? styles.isDelayed : ''}`}>
                     {(timeUntilExpectedDeparture <= 0) ? <span>nå</span> : <span>{timeUntilExpectedDeparture} min</span>}
                 </span>
-                <span className={`is-hidden-mobile ${styles.state}`}>
-                    {isDelayed ? 'Forsinket' : 'I rute'}
+                <span className={`is-hidden-mobile ${styles.state} ${delayedMinutes ? styles.isDelayed : ''}`}>
+                    {delayedMinutes ? 'Forsinket' : 'I rute'}
                 </span>
             </summary>
             <div className={styles.contentWrapper}>
                 <div className={styles.content}>
-                    innhold
+                    <h2>{longTitle}</h2>
+                    <ul>
+                        {delayedMinutes <= 0 && (
+                            <li>
+                                <p>Status: I rute</p>
+                            </li>
+                        )}
+                        {delayedMinutes > 0 && (
+                            <li>
+                                <p>Status: Forsinket {delayedMinutes} min</p>
+                            </li>
+                        )}
+                        <li>
+                            <p>Planlagt ankomst: {Temporal.PlainDateTime.from(aimedArrivalTime).toLocaleString()}</p>
+                        </li>
+                        <li>
+                            <p>Forventet ankomst: {then.toLocaleString()}</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </details>
