@@ -1,7 +1,7 @@
 import styles from './Home.module.scss';
 import Head from 'next/head'
-import NextArrivals from './components/NextArrivals/NextArrivals'
-import JourneyWrapper, { useJourneyContext } from './journeyContext'
+import JourneyWrapper, { useJourneyContext } from '../hooks/journeyContext'
+import NextArrivals from '../components/NextArrivals/NextArrivals';
 
 const Title = () => {
   const {stopPlaceName} = useJourneyContext();

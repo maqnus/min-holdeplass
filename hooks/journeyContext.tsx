@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { departureBoard } from "./api/queries";
-import client from "./client";
+import { departureBoard } from "../pages/api/enturAPI/queries";
+import client from "../pages/api/enturAPI/client";
 
 interface DestinationDisplay {
     frontText: string;
