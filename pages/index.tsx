@@ -8,7 +8,7 @@ const Title = () => {
   return (
     <section className='section'>
       <h1 className={`title has-text-centered ${styles.title}`}>
-        I <span className={'materialIcon has-text-danger'}>favorite</span> {stopPlaceName}
+        I <span className='materialIcon'>favorite</span> {stopPlaceName}
       </h1>
       <p className={`subtitle has-text-centered ${styles.subtitle}`}>
         Rutedata for verdens beste holdeplass <span>i sanntid</span>

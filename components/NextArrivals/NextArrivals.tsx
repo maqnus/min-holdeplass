@@ -6,7 +6,7 @@ const NextArrivals = () => {
     const {estimatedCalls} = useJourneyContext();
     return (
         <section className={`section scrollBox ${styles.section}`}>
-            <div className={`${styles.card} ${styles.dark}`}>
+            <div className={styles.card}>
                 <ul className={styles.list}>
                     {
                         estimatedCalls?.map((journey, key) => (

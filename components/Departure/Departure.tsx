@@ -35,7 +35,7 @@ const Departure = ({
     return (
         <details className={`${styles.arrival} ${delayedMinutes ? styles.isDelayed : ''}`}>
             <summary className={styles.summary}>
-                <span className={`materialIcon ${styles.icon}`}>
+                <span className={`is-hidden-mobile materialIcon ${styles.icon}`}>
                     {transportMode === 'bus' && (
                         <>{forBoarding ? 'directions_bus' : 'bus_alert'}</>
                     )}
