@@ -1,10 +1,10 @@
 
 export const departureBoard = `
-query($stopPlaceId: String!) {
+query($stopPlaceId: String!, $numberOfDepartures: Int!) {
     stopPlace(id: $stopPlaceId) {
         id
         name
-        estimatedCalls(timeRange: 72100, numberOfDepartures: 10) {     
+        estimatedCalls(timeRange: 72100, numberOfDepartures: $numberOfDepartures) {     
             realtime
             aimedArrivalTime
             aimedDepartureTime

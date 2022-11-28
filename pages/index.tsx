@@ -2,6 +2,7 @@ import styles from './Home.module.scss';
 import Head from 'next/head'
 import JourneyWrapper, { useJourneyContext } from '../hooks/journeyContext'
 import NextArrivals from '../components/NextArrivals/NextArrivals';
+import { useState } from 'react';
 
 const Title = () => {
   const {stopPlaceName} = useJourneyContext();
@@ -18,6 +19,7 @@ const Title = () => {
 };
 
 export default function Home() {
+  const [numberOfDepartures, setNumberOfDepartures] = useState<number>(7);
   return (
     <>
       <Head>
@@ -27,10 +29,13 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"></link>
       </Head>
-      <JourneyWrapper>
+      <JourneyWrapper numberOfDepartures={numberOfDepartures}>
         <main className='container'>
           <Title />
           <NextArrivals />
+          {/* <div className='has-text-centered mt-5'>
+            <button className='button' onClick={() => setNumberOfDepartures(numberOfDepartures + 3)}>Hent inn flere busser</button>
+          </div> */}
         </main>
         <footer className={styles.footer}>
           <a

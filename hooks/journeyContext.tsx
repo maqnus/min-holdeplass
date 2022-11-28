@@ -52,7 +52,11 @@ const JourneyContext = createContext<JourneyContextValue>({
     stopPlaceName: undefined,
 });
 
-const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
+interface JourneyWrapperProps {
+    numberOfDepartures?: number;
+}
+
+const JourneyWrapper = ({numberOfDepartures, children}: PropsWithChildren<JourneyWrapperProps>) => {
     // useRef is used to store a value that persists between renders
     const getData = useRef(true);
     const [isGettingData, setIsGettingData] = useState(false);
@@ -63,7 +67,10 @@ const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
         if (isGettingData) return;
         client.fetch({
             query: departureBoard,
-            variables: { stopPlaceId: 'NSR:StopPlace:4000' }
+            variables: {
+                stopPlaceId: 'NSR:StopPlace:4000',
+                numberOfDepartures: numberOfDepartures,
+            }
         }).then(({data}) => {
             setEstimatedCalls(data.stopPlace.estimatedCalls);
             setStopPlaceName(data.stopPlace.name);
@@ -77,7 +84,7 @@ const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
                 getDepartureData();
             }, 60 * 500);
         });
-    }, [isGettingData]);
+    }, [isGettingData, numberOfDepartures]);
 
     useEffect(() => {
         // This is a hack to prevent the useEffect from running on every render
