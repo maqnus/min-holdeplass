@@ -65,8 +65,6 @@ const JourneyWrapper = ({children}: PropsWithChildren<unknown>) => {
             query: departureBoard,
             variables: { stopPlaceId: 'NSR:StopPlace:4000' }
         }).then(({data}) => {
-            console.log(data);
-            
             setEstimatedCalls(data.stopPlace.estimatedCalls);
             setStopPlaceName(data.stopPlace.name);
         })

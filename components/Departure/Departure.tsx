@@ -1,20 +1,7 @@
 import styles from './Departure.module.scss';
 import { Temporal } from '@js-temporal/polyfill';
 
-type ArrivalTime = string | null; 
-
-interface DelayInfoProps {
-    aimedArrivalTime: ArrivalTime;
-    expectedArrivalTime: ArrivalTime;
-}
-
-const onTime = ({aimedArrivalTime, expectedArrivalTime}: DelayInfoProps) => {
-    if (!(aimedArrivalTime || expectedArrivalTime) || (aimedArrivalTime || expectedArrivalTime) === (null || undefined)) return false;
-    return aimedArrivalTime === aimedArrivalTime;
-};
-
 interface DepartureProps {
-    forAlighting: boolean,
     forBoarding: boolean,
     publicCode: string,
     shortTitle: string,
@@ -29,7 +16,6 @@ interface DepartureProps {
 }
 
 const Departure = ({
-    forAlighting,
     forBoarding,
     publicCode,
     shortTitle,
@@ -47,7 +33,7 @@ const Departure = ({
     const timeUntilExpectedDeparture = now.until(then, { smallestUnit: 'minute' }).minutes;
     const delayedMinutes = Temporal.PlainDateTime.from(aimedArrivalTime).until(then, { smallestUnit: 'minute' }).minutes;
     return (
-        <details className={`${styles.details} ${styles.arrival} ${delayedMinutes ? styles.isDelayed : ''}`}>
+        <details className={`${styles.arrival} ${delayedMinutes ? styles.isDelayed : ''}`}>
             <summary className={styles.summary}>
                 <span className={`materialIcon ${styles.icon}`}>
                     {transportMode === 'bus' && (
