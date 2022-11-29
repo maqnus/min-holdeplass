@@ -2,13 +2,12 @@ import styles from './Home.module.scss';
 import Head from 'next/head'
 import JourneyWrapper, { useJourneyContext } from '../hooks/journeyContext'
 import NextArrivals from '../components/NextArrivals/NextArrivals';
-import { useState } from 'react';
 
 const Title = () => {
   const {stopPlaceName} = useJourneyContext();
   return (
     <section className='section'>
-      <h1 className={`title has-text-centered ${styles.title}`}>
+      <h1 className={`title is-flex is-justify-content-center ${styles.title}`}>
         I <span className='materialIcon'>favorite</span> {stopPlaceName}
       </h1>
       <p className={`subtitle has-text-centered ${styles.subtitle}`}>
@@ -19,7 +18,6 @@ const Title = () => {
 };
 
 export default function Home() {
-  const [numberOfDepartures, setNumberOfDepartures] = useState<number>(7);
   return (
     <>
       <Head>
@@ -29,13 +27,14 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"></link>
       </Head>
-      <JourneyWrapper numberOfDepartures={numberOfDepartures}>
-        <main className='container'>
+      <JourneyWrapper numberOfDepartures={17}>
+        <header className={styles.header}>
           <Title />
-          <NextArrivals />
-          {/* <div className='has-text-centered mt-5'>
-            <button className='button' onClick={() => setNumberOfDepartures(numberOfDepartures + 3)}>Hent inn flere busser</button>
-          </div> */}
+        </header>
+        <main>
+          <div className='container'>
+            <NextArrivals />
+          </div>
         </main>
         <footer className={styles.footer}>
           <a
