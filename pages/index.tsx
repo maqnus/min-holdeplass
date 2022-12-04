@@ -23,9 +23,8 @@ export default function Home() {
       <Head>
         <title>Mitt stopp</title>
         <meta name="description" content="Rutedata for din favoritt-holdeplass i sanntid" />
-        <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"></link>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
       <JourneyWrapper numberOfDepartures={17}>
         <header className={styles.header}>
