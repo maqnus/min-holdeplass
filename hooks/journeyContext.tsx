@@ -76,8 +76,6 @@ interface JourneyWrapperProps {
 }
 
 const JourneyWrapper = ({numberOfDepartures, stopPlace, children}: PropsWithChildren<JourneyWrapperProps>) => {
-    console.log('stopPlace', stopPlace);
-    
     // useRef is used to store a value that persists between renders
     const [isGettingDepartureData, setIsGettingDepartureData] = useState(false);
     const [isGettingStopData, setIsGettingStopData] = useState(false);
