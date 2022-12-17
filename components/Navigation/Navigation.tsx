@@ -28,7 +28,7 @@ const Navigation = () => {
                     }}
                 />
             )}
-            {flags.can_see_get_stop_place && (
+            {flags.can_see_get_stop_place.enabled && (
                 <button onClick={getStopPlace}>getStopDate</button>
             )}
         </>
