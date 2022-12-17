@@ -39,6 +39,9 @@ const Departure = ({
                     {transportMode === 'bus' && (
                         <>{forBoarding ? 'directions_bus' : 'bus_alert'}</>
                     )}
+                    {transportMode === 'rail' && (
+                        <>{'train'}</>
+                    )}
                 </span>
                 <span className={styles.publicCode} style={{'backgroundColor': `#${presentation?.colour}`, 'color': `#${presentation?.textColor}`}}>
                     {publicCode}

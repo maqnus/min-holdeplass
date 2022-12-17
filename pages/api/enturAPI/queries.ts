@@ -1,5 +1,5 @@
 
-export const departureBoard = `
+export const departureQuery = `
 query($stopPlaceId: String!, $numberOfDepartures: Int!) {
     stopPlace(id: $stopPlaceId) {
         id
@@ -39,4 +39,12 @@ query($stopPlaceId: String!, $numberOfDepartures: Int!) {
     }
 }
 `;
-    
+
+export const stopQuery = `
+query($stopPlaceId: String!) {
+    stopPlace(id: $stopPlaceId) {
+        id,
+        name,
+    }
+}
+`

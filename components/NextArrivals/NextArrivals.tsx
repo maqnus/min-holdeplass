@@ -3,13 +3,24 @@ import styles from './NextArrivals.module.scss';
 import Departure from "../Departure/Departure";
 
 const NextArrivals = () => {
-    const {estimatedCalls} = useJourneyContext();
-    if (estimatedCalls.length <= 0) {
+    const {loadingEstimatedCalls, estimatedCalls} = useJourneyContext();
+    if (loadingEstimatedCalls) {
         return (
             <div className="has-text-centered">
                 <span className={`material-icons ${styles.rotate}`}>
                     autorenew
                 </span>
+            </div>
+        );
+    }
+    if (estimatedCalls.length <= 0) {
+        return (
+            <div className="has-text-centered">
+                <span className={`material-icons`}>
+                    location_off
+                </span>
+                <br />
+                <p>Ingen data tilgjengelig for denne lokasjonen, prøv igjen senere.</p>
             </div>
         );
     }
